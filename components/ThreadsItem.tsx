@@ -15,8 +15,8 @@ export const blurhash =
 
 export default function ThreadsItem(thread: Thread): JSX.Element {
   return (
-    <View>
-      <Text>{thread.author.username}</Text>
+    <View style={styles.container}>
+      <PostLeftSide {...thread} />
       <View style={styles.postContainer}>
         <PostHeading
           name={thread.author.name}
@@ -51,14 +51,14 @@ export function PostHeading({
 }) {
   console.log("verified", verified);
   return (
-    <View style={styles.container}>
-      <View style={styles.postHeadingContainer}>
+    <View style={styles.postHeadingContainer}>
+      <View style={styles.postHeadingPart}>
         <Text style={styles.postHeadingName}>{name}</Text>
         {verified && (
           <MaterialIcons name="verified" size={14} color="#60a5fa" />
         )}
       </View>
-      <View style={styles.postHeadingContainer}>
+      <View style={styles.postHeadingPart}>
         <Text style={styles.postHeadingCreatedAt}>{timeAgo(createdAt)}</Text>
         <Feather name="more-horizontal" size={14} color="gray" />
       </View>
@@ -94,17 +94,53 @@ export function BottomIcons() {
   );
 }
 
+function PostLeftSide(thread: Thread) {
+  const currentTheme = useColorScheme();
+  const borderColor = currentTheme === "light" ? "#00000020" : "ffffff20";
+
+  return (
+    <View style={styles.postLeftSideContainer}>
+      <Image
+        source={thread.author.photo}
+        style={styles.profileImage}
+        placeholder={blurhash}
+        contentFit="cover"
+        transition={200}
+      />
+      <View style={[styles.horizontalLine, { borderColor: borderColor }]} />
+      <View style={styles.PostLeftSideImagesContainer}>
+        {[1, 2, 3].map((index) => (
+          <Image
+            key={index}
+            //@ts-ignore
+            source={thread.replies[index - 1]?.author.photo}
+            style={{ width: index * 7, height: index * 7, borderRadius: 15 }}
+            placeholder={blurhash}
+            contentFit="cover"
+            transition={500}
+          />
+        ))}
+      </View>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexGrow: 1,
+    gap: 6,
+    paddingBottom: 30,
   },
   postContainer: {
     gap: 6,
   },
   postHeadingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexGrow: 1,
+  },
+  postHeadingPart: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
@@ -127,5 +163,24 @@ const styles = StyleSheet.create({
     width: "100%",
     minHeight: 300,
     borderRadius: 10,
+  },
+  postLeftSideContainer: {
+    justifyContent: "space-between",
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
+  horizontalLine: {
+    borderWidth: 1,
+    alignSelf: "center",
+    flexGrow: 1,
+  },
+  PostLeftSideImagesContainer: {
+    width: 20,
+    alignItems: "center",
+    alignSelf: "center",
+    gap: 3,
   },
 });
