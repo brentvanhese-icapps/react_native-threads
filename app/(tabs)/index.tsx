@@ -6,13 +6,14 @@ import {
   StyleSheet,
 } from "react-native";
 
-import EditScreenInfo from "../../components/EditScreenInfo";
-import { Text, View } from "../../components/Themed";
 import Lottie from "lottie-react-native";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import { ThreadContext } from "../../context/thread-context";
+import ThreadsItem from "../../components/ThreadsItem";
 
 export default function TabOneScreen() {
   const animationRef = useRef<Lottie>(null);
+  const threads = useContext(ThreadContext);
 
   return (
     <SafeAreaView>
@@ -35,6 +36,9 @@ export default function TabOneScreen() {
           autoPlay={true}
           style={styles.logo}
         />
+        {threads.map((thread) => (
+          <ThreadsItem key={thread.id} {...thread} />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );

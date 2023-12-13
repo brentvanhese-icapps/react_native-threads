@@ -18,7 +18,7 @@ export function createRandomUser(): User {
     id: faker.string.uuid(),
     photo: faker.image.avatar(),
     name: faker.person.firstName() + " " + faker.person.lastName(),
-    verified: Math.random() >= 5,
+    verified: Math.random() >= 0.5,
     bio: faker.person.bio(),
     username: faker.internet.userName(),
     link: faker.internet.url(),
