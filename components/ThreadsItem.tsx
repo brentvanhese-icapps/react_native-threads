@@ -1,6 +1,12 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, useColorScheme } from "react-native";
 import { Thread } from "../types";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Feather,
+  FontAwesome,
+  Ionicons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { timeAgo } from "../utils/time-ago";
 
 export default function ThreadsItem(thread: Thread): JSX.Element {
@@ -13,6 +19,7 @@ export default function ThreadsItem(thread: Thread): JSX.Element {
           createdAt={thread.createdAt}
           verified={thread.author.verified}
         />
+        <BottomIcons />
         <PostFooter replies={thread.repliesCount} likes={thread.likesCount} />
       </View>
     </View>
@@ -53,9 +60,23 @@ export function PostFooter({
   likes: number;
 }) {
   return (
-    <Text style={styles.postFooter}>
+    <Text style={styles.postFooterContainer}>
       {replies} replies . {likes} likes
     </Text>
+  );
+}
+
+export function BottomIcons() {
+  const iconSize = 20;
+  const currentTheme = useColorScheme();
+  const iconColor = currentTheme === "dark" ? "white" : "black";
+  return (
+    <View style={styles.bottomIconsContainer}>
+      <FontAwesome name="heart" size={iconSize} color={iconColor} />
+      <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor} />
+      <AntDesign name="retweet" size={iconSize} color={iconColor} />
+      <Feather name="send" size={iconSize} color={iconColor} />
+    </View>
   );
 }
 
@@ -77,7 +98,12 @@ const styles = StyleSheet.create({
   postHeadingCreatedAt: {
     color: "gray",
   },
-  postFooter: {
+  postFooterContainer: {
     color: "gray",
+  },
+  bottomIconsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
   },
 });
