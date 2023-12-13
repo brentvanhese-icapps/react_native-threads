@@ -13,6 +13,7 @@ export default function ThreadsItem(thread: Thread): JSX.Element {
           createdAt={thread.createdAt}
           verified={thread.author.verified}
         />
+        <PostFooter replies={thread.repliesCount} likes={thread.likesCount} />
       </View>
     </View>
   );
@@ -44,6 +45,20 @@ export function PostHeading({
   );
 }
 
+export function PostFooter({
+  replies,
+  likes,
+}: {
+  replies: number;
+  likes: number;
+}) {
+  return (
+    <Text style={styles.postFooter}>
+      {replies} replies . {likes} likes
+    </Text>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
@@ -60,6 +75,9 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   postHeadingCreatedAt: {
+    color: "gray",
+  },
+  postFooter: {
     color: "gray",
   },
 });
