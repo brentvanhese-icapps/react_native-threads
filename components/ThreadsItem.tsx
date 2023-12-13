@@ -8,17 +8,31 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { timeAgo } from "../utils/time-ago";
+import { Image } from "expo-image";
+
+export const blurhash =
+  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 export default function ThreadsItem(thread: Thread): JSX.Element {
   return (
     <View>
       <Text>{thread.author.username}</Text>
-      <View>
+      <View style={styles.postContainer}>
         <PostHeading
           name={thread.author.name}
           createdAt={thread.createdAt}
           verified={thread.author.verified}
         />
+        <Text>{thread.content}</Text>
+        {thread.image && (
+          <Image
+            source={thread.image}
+            style={styles.image}
+            placeholder={blurhash}
+            contentFit="cover"
+            transition={200}
+          />
+        )}
         <BottomIcons />
         <PostFooter replies={thread.repliesCount} likes={thread.likesCount} />
       </View>
@@ -87,6 +101,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexGrow: 1,
   },
+  postContainer: {
+    gap: 6,
+  },
   postHeadingContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -105,5 +122,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+  },
+  image: {
+    width: "100%",
+    minHeight: 300,
+    borderRadius: 10,
   },
 });
