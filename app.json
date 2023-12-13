@@ -16,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "be.brentvanhese.react-native-threads"
     },
     "android": {
       "adaptiveIcon": {
