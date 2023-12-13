@@ -49,7 +49,6 @@ export function PostHeading({
   createdAt: string;
   verified: boolean;
 }) {
-  console.log("verified", verified);
   return (
     <View style={styles.postHeadingContainer}>
       <View style={styles.postHeadingPart}>
