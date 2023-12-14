@@ -14,11 +14,12 @@ export default function ReplyItem({
     <View style={styles.container}>
       <Image
         source={author.photo}
+        style={styles.image}
         placeholder={blurhash}
         contentFit="cover"
         transition={200}
       />
-      <View>
+      <View style={styles.reply}>
         <PostHeading
           name={author.name}
           createdAt={createdAt}
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
   },
-  authorPhoto: {
+  image: {
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -45,5 +46,6 @@ const styles = StyleSheet.create({
   reply: {
     flexShrink: 1,
     gap: 10,
+    width: "100%",
   },
 });
