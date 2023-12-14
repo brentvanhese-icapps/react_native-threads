@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, useColorScheme } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  useColorScheme,
+  Pressable,
+} from "react-native";
 import { Thread } from "../types";
 import {
   AntDesign,
@@ -9,13 +15,19 @@ import {
 } from "@expo/vector-icons";
 import { timeAgo } from "../utils/time-ago";
 import { Image } from "expo-image";
+import { useNavigation } from "expo-router";
 
 export const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 export default function ThreadsItem(thread: Thread): JSX.Element {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      // @ts-ignore
+      onPress={() => navigation.navigate("thread-details", { ...thread })}
+    >
       <PostLeftSide {...thread} />
       <View style={styles.postContainer}>
         <PostHeading
@@ -36,7 +48,7 @@ export default function ThreadsItem(thread: Thread): JSX.Element {
         <BottomIcons />
         <PostFooter replies={thread.repliesCount} likes={thread.likesCount} />
       </View>
-    </View>
+    </Pressable>
   );
 }
 
