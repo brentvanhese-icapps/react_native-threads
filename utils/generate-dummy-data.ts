@@ -44,7 +44,6 @@ export function createRandomThread(): Thread {
       likes: Math.floor(Math.random() * 1000),
       createdAt: faker.date.recent().toISOString(),
     })),
-    repliesCount: Math.floor(Math.random() * 100),
     likesCount: Math.floor(Math.random() * 1000),
     mention: Math.random() > 0.5,
     mentionUser,

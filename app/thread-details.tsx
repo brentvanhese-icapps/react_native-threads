@@ -31,7 +31,6 @@ export default function ThreadDetails(): JSX.Element {
     setThread((prevState) => ({
       ...prevState,
       replies: [newReply, ...prevState.replies!],
-      repliesCount: prevState.repliesCount + 1,
     }));
     setReplyContent("");
   }

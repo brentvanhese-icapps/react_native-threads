@@ -46,7 +46,10 @@ export default function ThreadsItem(thread: Thread): JSX.Element {
           />
         )}
         <BottomIcons />
-        <PostFooter replies={thread.repliesCount} likes={thread.likesCount} />
+        <PostFooter
+          replies={thread.replies ? thread.replies.length : 0}
+          likes={thread.likesCount}
+        />
       </View>
     </Pressable>
   );
