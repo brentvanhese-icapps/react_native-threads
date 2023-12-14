@@ -128,7 +128,7 @@ function PostLeftSide(thread: Thread) {
             style={{ width: index * 7, height: index * 7, borderRadius: 15 }}
             placeholder={blurhash}
             contentFit="cover"
-            transition={500}
+            transition={200}
           />
         ))}
       </View>
