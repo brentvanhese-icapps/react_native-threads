@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   postContainer: {
+    flexShrink: 1,
     gap: 6,
   },
   postHeadingContainer: {
